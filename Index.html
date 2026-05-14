@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>С Днём Рождения! 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --crimson: #8b0000;
+  --crimson2: #c0021c;
+  --rose: #ff3e6e;
+  --pink: #ffb3c6;
+  --gold: #ffd700;
+  --dark: #1a0005;
+  --cream: #fff5f7;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  min-height:100vh;
+  background: radial-gradient(ellipse at 50% 0%, #2d0012 0%, #0d0005 70%);
+  font-family:'Nunito',sans-serif;
+  overflow-x:hidden;
+  color:#fff;
+  cursor:default;
+}
+
+/* ── Spider Lily Background ── */
+.lily-bg {
+  position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+}
+.lily {
+  position:absolute;
+  opacity:.18;
+  animation:lilyPulse ease-in-out infinite;
+}
+@keyframes lilyPulse {
+  0%,100%{opacity:.12;transform:scale(1) rotate(var(--r,0deg));}
+  50%{opacity:.22;transform:scale(1.06) rotate(var(--r,0deg));}
+}
+
+/* ── Confetti ── */
+.confetti-wrap{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
+.dot{position:absolute;border-radius:50%;animation:fall linear infinite;}
+@keyframes fall{
+  0%{transform:translateY(-30px) rotate(0deg);opacity:1;}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:.2;}
+}
+
+/* ── Main ── */
+.page{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;padding:50px 20px 80px;gap:44px;}
+
+/* ── Title ── */
+.title-block{text-align:center;}
+.title-block h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,7vw,5rem);
+  background:linear-gradient(135deg,#ff6b8a,#ffd700,#ff3e6e);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 18px rgba(192,2,28,.6));
+  animation:titleGlow 3s ease-in-out infinite;
+}
+@keyframes titleGlow{
+  0%,100%{filter:drop-shadow(0 0 18px rgba(192,2,28,.6));}
+  50%{filter:drop-shadow(0 0 35px rgba(255,62,110,.9));}
+}
+.subtitle{margin-top:10px;font-size:1.1rem;letter-spacing:3px;color:#ff9bb8;text-transform:uppercase;font-weight:700;}
+
+/* ── CHARACTER ── */
+.stage{display:flex;flex-direction:column;align-items:center;position:relative;}
+.char-wrap{width:240px;height:420px;position:relative;}
+.char-wrap svg{width:100%;height:100%;overflow:visible;}
+
+/* Subtle body idle */
+.body-grp{transform-origin:120px 410px;animation:bodySway 3s ease-in-out infinite;}
+@keyframes bodySway{0%,100%{transform:rotate(-1deg);}50%{transform:rotate(1deg);}}
+
+/* CELEBRATION WAVE every 2 seconds */
+.arm-L{transform-origin:78px 200px;animation:waveL 2s ease-in-out infinite;}
+.arm-R{transform-origin:162px 200px;animation:waveR 2s ease-in-out infinite;}
+@keyframes waveL{
+  0%,45%,100%{transform:rotate(0deg);}
+  10%{transform:rotate(-60deg);}
+  20%{transform:rotate(-45deg);}
+  30%{transform:rotate(-65deg);}
+}
+@keyframes waveR{
+  0%,45%,100%{transform:rotate(0deg);}
+  10%{transform:rotate(60deg);}
+  20%{transform:rotate(45deg);}
+  30%{transform:rotate(65deg);}
+}
+
+/* candle flicker */
+.flame{transform-origin:50% bottom;animation:flicker .4s ease-in-out infinite alternate;}
+@keyframes flicker{0%{transform:scaleX(1) scaleY(1);}100%{transform:scaleX(1.15) scaleY(1.12);}}
+
+.char-shadow{
+  width:140px;height:20px;
+  background:radial-gradient(ellipse,rgba(139,0,0,.55) 0%,transparent 70%);
+  border-radius:50%;margin-top:-10px;
+  animation:shadowPulse 3s ease-in-out infinite;
+}
+@keyframes shadowPulse{0%,100%{transform:scaleX(1);}50%{transform:scaleX(.88);}}
+
+/* ── Balloons ── */
+.balloon-row{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;align-items:flex-end;}
+.balloon-wrap{display:flex;flex-direction:column;align-items:center;cursor:pointer;}
+.balloon-body{
+  width:60px;height:78px;border-radius:50% 50% 48% 48%;
+  position:relative;
+  transition:transform .2s;
+  animation:floatB 3.5s ease-in-out infinite;
+  box-shadow:inset -8px -6px 16px rgba(0,0,0,.3),inset 6px 4px 12px rgba(255,255,255,.25);
+}
+.balloon-body:hover{transform:scale(1.15) translateY(-18px)!important;}
+.balloon-body::before{
+  content:'';position:absolute;top:12%;left:18%;
+  width:22px;height:14px;border-radius:50%;
+  background:rgba(255,255,255,.35);transform:rotate(-30deg);
+}
+.balloon-body::after{
+  content:'';position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);
+  border-left:4px solid transparent;border-right:4px solid transparent;
+  border-top:10px solid currentColor;
+}
+.balloon-string{width:1.5px;height:22px;background:rgba(255,255,255,.4);}
+.b1{background:#c0021c;color:#c0021c;}
+.b2{background:#e8426a;color:#e8426a;}
+.b3{background:#ffd700;color:#ffd700;}
+.b4{background:#8b0000;color:#8b0000;}
+.b5{background:#ff6b8a;color:#ff6b8a;}
+.b1{animation-delay:0s;}.b2{animation-delay:.35s;}.b3{animation-delay:.7s;}.b4{animation-delay:.15s;}.b5{animation-delay:.55s;}
+@keyframes floatB{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-16px) rotate(3deg);}}
+
+/* Balloon popup */
+.balloon-popup{
+  display:none;position:fixed;inset:0;z-index:100;
+  background:rgba(0,0,0,.75);align-items:center;justify-content:center;
+}
+.balloon-popup.open{display:flex;}
+.popup-card{
+  background:linear-gradient(135deg,#1a0008,#3d0016);
+  border:1.5px solid rgba(192,2,28,.6);
+  border-radius:24px;padding:38px 44px;max-width:460px;width:90%;
+  text-align:center;position:relative;
+  box-shadow:0 0 60px rgba(192,2,28,.4);
+  animation:popIn .35s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn{0%{transform:scale(.5);opacity:0;}100%{transform:scale(1);opacity:1;}}
+.popup-card .emoji{font-size:3rem;margin-bottom:12px;}
+.popup-card h3{font-family:'Playfair Display',serif;font-size:1.6rem;color:#ffd700;margin-bottom:12px;}
+.popup-card p{color:#ffb3c6;line-height:1.8;}
+.popup-img{width:100%;max-width:280px;border-radius:16px;margin:16px auto 0;display:block;border:2px solid rgba(192,2,28,.5);}
+.close-btn{
+  position:absolute;top:14px;right:18px;background:none;border:none;
+  color:#ff6b8a;font-size:1.5rem;cursor:pointer;line-height:1;
+}
+.close-btn:hover{color:#fff;}
+
+/* ── Message card ── */
+.msg-card{
+  background:rgba(139,0,0,.18);
+  backdrop-filter:blur(16px);
+  border:1.5px solid rgba(192,2,28,.45);
+  border-radius:24px;padding:34px 38px;
+  max-width:540px;width:100%;text-align:center;
+  box-shadow:0 8px 40px rgba(139,0,0,.25);
+}
+.msg-card h2{font-family:'Playfair Display',serif;font-size:1.8rem;color:#ffd700;margin-bottom:14px;}
+.msg-card p{color:#ffd6e0;line-height:1.9;font-size:1.05rem;}
+
+/* ── Spider lily SVG decorations ── */
+.lily-decor{position:absolute;pointer-events:none;}
+
+/* ── Countdown ── */
+.countdown{
+  background:rgba(139,0,0,.22);
+  border:1.5px solid rgba(192,2,28,.5);
+  border-radius:20px;padding:24px 36px;text-align:center;max-width:420px;width:100%;
+}
+.countdown h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:#ffd700;margin-bottom:14px;}
+.cnt-nums{display:flex;gap:20px;justify-content:center;}
+.cnt-b{display:flex;flex-direction:column;align-items:center;}
+.cnt-n{font-size:2.2rem;font-weight:900;color:#ff6b8a;}
+.cnt-l{font-size:.65rem;color:#ff9bb8;letter-spacing:1.5px;text-transform:uppercase;}
+
+/* ── Floating petals ── */
+.petal{position:fixed;pointer-events:none;z-index:1;animation:petalFall linear infinite;}
+@keyframes petalFall{
+  0%{transform:translateY(-20px) rotate(0deg) translateX(0);opacity:.8;}
+  50%{transform:translateY(50vh) rotate(180deg) translateX(30px);opacity:.6;}
+  100%{transform:translateY(105vh) rotate(360deg) translateX(-10px);opacity:0;}
+}
+
+.footer{color:#8b2040;font-size:.85rem;text-align:center;padding-bottom:24px;letter-spacing:1px;}
+</style>
+</head>
+<body>
+
+<!-- Spider lily background SVG pattern -->
+<div class="lily-bg" id="lilyBg"></div>
+<div class="confetti-wrap" id="confetti"></div>
+
+<div class="page">
+
+  <!-- Title -->
+  <div class="title-block">
+    <h1>С Днём Рождения! 🌹</h1>
+    <p class="subtitle">✨ Особенный день для особенной тебя ✨</p>
+  </div>
+
+  <!-- Balloons -->
+  <div class="balloon-row">
+    <div class="balloon-wrap" onclick="openBalloon(0)">
+      <div class="balloon-body b1"></div><div class="balloon-string"></div>
+    </div>
+    <div class="balloon-wrap" onclick="openBalloon(1)">
+      <div class="balloon-body b2"></div><div class="balloon-string"></div>
+    </div>
+    <div class="balloon-wrap" onclick="openBalloon(2)">
+      <div class="balloon-body b3"></div><div class="balloon-string"></div>
+    </div>
+    <div class="balloon-wrap" onclick="openBalloon(3)">
+      <div class="balloon-body b4"></div><div class="balloon-string"></div>
+    </div>
+    <div class="balloon-wrap" onclick="openBalloon(4)">
+      <div class="balloon-body b5"></div><div class="balloon-string"></div>
+    </div>
+  </div>
+
+  <!-- CHARACTER -->
+  <div class="stage">
+    <div class="char-wrap">
+      <svg viewBox="0 0 240 430" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <!-- Skin -->
+          <radialGradient id="sk" cx="40%" cy="35%" r="60%">
+            <stop offset="0%" stop-color="#ffe8d6"/>
+            <stop offset="100%" stop-color="#f5c5a3"/>
+          </radialGradient>
+          <radialGradient id="skb" cx="38%" cy="30%" r="65%">
+            <stop offset="0%" stop-color="#fde0c8"/>
+            <stop offset="100%" stop-color="#f0b898"/>
+          </radialGradient>
+          <!-- Hair — honey blonde (matches reference) -->
+          <linearGradient id="hg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#d4a043"/>
+            <stop offset="40%" stop-color="#c8862a"/>
+            <stop offset="100%" stop-color="#8b5e10"/>
+          </linearGradient>
+          <!-- Dress — dark red/crimson -->
+          <linearGradient id="dg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#c0021c"/>
+            <stop offset="100%" stop-color="#6b0010"/>
+          </linearGradient>
+          <!-- Eye — blue-grey -->
+          <radialGradient id="eg" cx="35%" cy="35%" r="60%">
+            <stop offset="0%" stop-color="#8ab8d8"/>
+            <stop offset="60%" stop-color="#4a86a8"/>
+            <stop offset="100%" stop-color="#2a5a78"/>
+          </radialGradient>
+          <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="3" dy="5" stdDeviation="4" flood-color="rgba(0,0,0,.3)"/>
+          </filter>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <g class="body-grp" filter="url(#sh)">
+
+          <!-- ── LEGS ── -->
+          <rect x="96" y="315" width="22" height="82" rx="10" fill="url(#skb)"/>
+          <rect x="106" y="315" width="9" height="82" rx="6" fill="rgba(0,0,0,.07)"/>
+          <!-- Left shoe -->
+          <ellipse cx="107" cy="399" rx="16" ry="9" fill="#8b0000"/>
+          <ellipse cx="113" cy="396" rx="9" ry="6" fill="#c0021c"/>
+
+          <rect x="122" y="315" width="22" height="82" rx="10" fill="url(#skb)"/>
+          <rect x="124" y="315" width="9" height="82" rx="6" fill="rgba(0,0,0,.07)"/>
+          <!-- Right shoe -->
+          <ellipse cx="133" cy="399" rx="16" ry="9" fill="#8b0000"/>
+          <ellipse cx="139" cy="396" rx="9" ry="6" fill="#c0021c"/>
+
+          <!-- ── SKIRT ── -->
+          <path d="M78,235 Q58,315 90,320 Q120,325 150,320 Q182,315 162,235 Z" fill="url(#dg)"/>
+          <!-- skirt highlight -->
+          <path d="M94,235 Q82,285 92,312 Q110,320 120,312 Q130,285 128,235 Z" fill="rgba(255,100,100,.12)"/>
+          <!-- fold lines -->
+          <path d="M90,255 Q96,290 92,315" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/>
+          <path d="M148,255 Q142,290 148,315" stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none"/>
+          <!-- small roses on skirt -->
+          <circle cx="105" cy="275" r="5" fill="#ff3e6e" opacity=".7"/>
+          <circle cx="135" cy="285" r="4" fill="#ff3e6e" opacity=".6"/>
+          <circle cx="118" cy="298" r="5" fill="#8b0000" opacity=".8"/>
+
+          <!-- ── BODICE / TOP ── -->
+          <rect x="88" y="190" width="64" height="55" rx="14" fill="url(#dg)"/>
+          <ellipse cx="108" cy="203" rx="13" ry="8" fill="rgba(255,255,255,.2)" transform="rotate(-15,108,203)"/>
+          <!-- neckline -->
+          <path d="M102,190 Q120,180 138,190" stroke="rgba(255,200,200,.4)" stroke-width="2" fill="none"/>
+          <!-- small button detail -->
+          <circle cx="120" cy="210" r="2.5" fill="rgba(255,255,255,.25)"/>
+          <circle cx="120" cy="223" r="2.5" fill="rgba(255,255,255,.25)"/>
+
+          <!-- ── ARM LEFT (waves with candle) ── -->
+          <g class="arm-L">
+            <path d="M90,200 Q60,188 50,165" stroke="#f5c5a3" stroke-width="19" stroke-linecap="round" fill="none"/>
+            <path d="M90,200 Q60,188 50,165" stroke="rgba(0,0,0,.08)" stroke-width="11" stroke-linecap="round" fill="none"/>
+            <!-- hand -->
+            <circle cx="48" cy="162" r="13" fill="url(#skb)"/>
+            <!-- candle in left hand -->
+            <rect x="43" y="130" width="10" height="30" rx="4" fill="#ffd700"/>
+            <rect x="43" y="130" width="10" height="8" rx="2" fill="#e8c200"/>
+            <!-- wax drip -->
+            <path d="M43,142 Q40,146 42,150" stroke="rgba(255,215,0,.6)" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <!-- flame -->
+            <g class="flame">
+              <ellipse cx="48" cy="126" rx="5" ry="8" fill="#ff8c00"/>
+              <ellipse cx="48" cy="124" rx="3" ry="5" fill="#ffd700"/>
+              <ellipse cx="48" cy="122" rx="1.5" ry="3" fill="#fff"/>
+            </g>
+          </g>
+
+          <!-- ── ARM RIGHT (waves with candle) ── -->
+          <g class="arm-R">
+            <path d="M152,200 Q182,188 192,165" stroke="#f5c5a3" stroke-width="19" stroke-linecap="round" fill="none"/>
+            <path d="M152,200 Q182,188 192,165" stroke="rgba(0,0,0,.08)" stroke-width="11" stroke-linecap="round" fill="none"/>
+            <!-- hand -->
+            <circle cx="194" cy="162" r="13" fill="url(#skb)"/>
+            <!-- candle in right hand -->
+            <rect x="189" y="130" width="10" height="30" rx="4" fill="#c0021c"/>
+            <rect x="189" y="130" width="10" height="8" rx="2" fill="#8b0000"/>
+            <!-- wax drip -->
+            <path d="M199,142 Q202,146 200,150" stroke="rgba(192,2,28,.6)" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <!-- flame -->
+            <g class="flame" style="animation-delay:.15s">
+              <ellipse cx="194" cy="126" rx="5" ry="8" fill="#ff8c00"/>
+              <ellipse cx="194" cy="124" rx="3" ry="5" fill="#ffd700"/>
+              <ellipse cx="194" cy="122" rx="1.5" ry="3" fill="#fff"/>
+            </g>
+          </g>
+
+          <!-- ── NECK ── -->
+          <rect x="111" y="158" width="18" height="35" rx="8" fill="url(#sk)"/>
+
+          <!-- ── HEAD ── -->
+          <ellipse cx="120" cy="120" rx="48" ry="54" fill="url(#sk)"/>
+          <!-- cheeks -->
+          <ellipse cx="88" cy="130" rx="13" ry="9" fill="rgba(255,140,150,.3)"/>
+          <ellipse cx="152" cy="130" rx="13" ry="9" fill="rgba(255,140,150,.3)"/>
+          <!-- ears -->
+          <ellipse cx="74" cy="120" rx="8" ry="11" fill="#f5c5a3"/>
+          <ellipse cx="74" cy="120" rx="4" ry="7" fill="#f0b898"/>
+          <ellipse cx="166" cy="120" rx="8" ry="11" fill="#f5c5a3"/>
+          <ellipse cx="166" cy="120" rx="4" ry="7" fill="#f0b898"/>
+
+          <!-- ── HAIR ── (long, honey-blonde, medium length like reference) -->
+          <!-- back volume -->
+          <ellipse cx="120" cy="100" rx="52" ry="45" fill="url(#hg)"/>
+          <!-- left side long flow -->
+          <path d="M76,105 Q52,145 58,200 Q62,230 72,240 Q78,185 80,140 Q76,120 76,105 Z" fill="#c8862a"/>
+          <!-- right side long flow -->
+          <path d="M164,105 Q188,145 182,200 Q178,230 168,240 Q162,185 162,140 Q166,120 164,105 Z" fill="#c8862a"/>
+          <!-- top cap (front) -->
+          <ellipse cx="120" cy="90" rx="50" ry="42" fill="#d4a043"/>
+          <!-- subtle parting / strands -->
+          <path d="M118,68 Q120,72 122,68" stroke="#b8861e" stroke-width="2" fill="none"/>
+          <path d="M105,72 Q112,65 120,64 Q128,65 135,72" stroke="#c8902a" stroke-width="2" fill="none"/>
+          <!-- hair highlight -->
+          <ellipse cx="104" cy="78" rx="20" ry="11" fill="rgba(255,235,180,.38)" transform="rotate(-18,104,78)"/>
+          <!-- loose strands framing face -->
+          <path d="M78,100 Q72,118 76,135" stroke="#b8761a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <path d="M162,100 Q168,118 164,135" stroke="#b8761a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+
+          <!-- ── EYES ── (blue-grey, large, with mascara lashes) -->
+          <!-- Left -->
+          <ellipse cx="100" cy="118" rx="13" ry="12" fill="white"/>
+          <ellipse cx="100" cy="119" rx="9" ry="9" fill="url(#eg)"/>
+          <ellipse cx="100" cy="119" rx="5.5" ry="5.5" fill="#1e4a6e"/>
+          <ellipse cx="100" cy="119" rx="2.8" ry="2.8" fill="#0a1e30"/>
+          <ellipse cx="97" cy="116" rx="1.8" ry="1.8" fill="rgba(255,255,255,.9)"/>
+          <!-- lashes left (mascara — thick) -->
+          <path d="M88,110 Q92,104 95,109" stroke="#1a1a1a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M94,107 Q97,101 100,107" stroke="#1a1a1a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M100,106 Q103,100 106,106" stroke="#1a1a1a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M107,108 Q111,103 112,109" stroke="#1a1a1a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <!-- bottom lashes -->
+          <path d="M90,126 Q88,131 89,127" stroke="#333" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <path d="M108,128 Q110,133 110,129" stroke="#333" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <!-- eyebrow left — well-defined, dark -->
+          <path d="M85,106 Q100,98 113,104" stroke="#2a1a0a" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+
+          <!-- Right -->
+          <ellipse cx="140" cy="118" rx="13" ry="12" fill="white"/>
+          <ellipse cx="140" cy="119" rx="9" ry="9" fill="url(#eg)"/>
+          <ellipse cx="140" cy="119" rx="5.5" ry="5.5" fill="#1e4a6e"/>
+          <ellipse cx="140" cy="119" rx="2.8" ry="2.8" fill="#0a1e30"/>
+          <ellipse cx="137" cy="116" rx="1.8" ry="1.8" fill="rgba(255,255,255,.9)"/>
+          <!-- lashes right -->
+          <path d="M128,110 Q132,104 135,109" stroke="#1a1a1a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M134,107 Q137,101 140,107" stroke="#1a1a1a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M140,106 Q143,100 146,106" stroke="#1a1a1a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M147,108 Q151,103 152,109" stroke="#1a1a1a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M130,126 Q128,131 129,127" stroke="#333" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <path d="M148,128 Q150,133 150,129" stroke="#333" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <!-- eyebrow right -->
+          <path d="M127,106 Q140,98 155,104" stroke="#2a1a0a" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+
+          <!-- ── NOSE ── (subtle) -->
+          <path d="M116,134 Q120,143 124,134" stroke="#e0a080" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="114" cy="137" r="2.8" fill="rgba(200,120,90,.22)"/>
+          <circle cx="126" cy="137" r="2.8" fill="rgba(200,120,90,.22)"/>
+
+          <!-- ── LIPS ── (pink, full) -->
+          <path d="M107,148 Q115,141 120,144 Q125,141 133,148 Q125,146 120,148 Q115,146 
